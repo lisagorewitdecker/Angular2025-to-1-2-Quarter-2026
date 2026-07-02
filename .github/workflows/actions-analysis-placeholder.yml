@@ -3,6 +3,8 @@ name: Actions Analysis Placeholder
 "on":
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   noop:
     runs-on: ubuntu-latest
