@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "ci(deps):"
+      prefix: "deps(github-actions):"
     open-pull-requests-limit: 3
 
   # Maintain dependencies for npm
