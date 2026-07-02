@@ -2,19 +2,28 @@ version: 3
 updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
-    # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "ci(deps):"
+    open-pull-requests-limit: 3
 
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    commit-message:
+      prefix: "deps(npm):"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase-if-necessary"
 
   # Maintain dependencies for Composer
   - package-ecosystem: "composer"
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "deps(composer):"
+    open-pull-requests-limit: 3
