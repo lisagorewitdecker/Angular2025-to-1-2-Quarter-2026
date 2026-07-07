@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:security": "node --test security/*.test.mjs"
+    "check:no-ip": "node security/check-no-ip.mjs",
+    "test:security": "npm run check:no-ip && node --test security/*.test.mjs"
   },
   "private": true,
   "dependencies": {
