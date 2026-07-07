@@ -1,32 +1,49 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    });
-    TestBed.compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FormsModule],
+      declarations: [AppComponent],
+    }).compileComponents();
   });
 
-  it('should create the app', async(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
+
     expect(app).toBeTruthy();
-  }));
+  });
 
-  it(`should have as title 'app works!'`, async(() => {
+  it('should initialize with an empty username', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
+    const app = fixture.componentInstance;
 
-  it('should render title in a h1 tag', async(() => {
+    expect(app.username).toBe('');
+  });
+
+  it('should disable reset while the username is empty', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const button = compiled.querySelector('button') as HTMLButtonElement;
+
+    expect(button.disabled).toBeTrue();
+  });
+
+  it('should render the username and enable reset once text is present', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.componentInstance.username = 'Lisa';
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const button = compiled.querySelector('button') as HTMLButtonElement;
+
+    expect(compiled.querySelector('p')?.textContent).toContain('Lisa');
+    expect(button.disabled).toBeFalse();
+  });
 });
