@@ -14,7 +14,7 @@
   "dependencies": {
     "@angular/animations": "^22.0.5",
     "@angular/common": "^22.0.5",
-    "@angular/compiler": "^20.3.25",
+    "@angular/compiler": "^22.0.5",
     "@angular/core": "^22.0.5",
     "@angular/forms": "^22.0.5",
     "@babel/cli": "^7.25.6",
@@ -28,7 +28,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.7.0",
     "vite": ">=6.4.3",
-    "webpack": ">=5.104.1",
+    "webpack": ">=5.108.4",
     "webpack-dev-middleware": ">=6.1.2",
     "zone.js": "~0.15.0"
   },
@@ -55,7 +55,7 @@
     "tslib": "^2.7.0",
     "typescript": "~4.9.4",
     "vite": ">=6.4.3",
-    "webpack": ">=5.104.1",
+    "webpack": ">=5.108.4",
     "webpack-dev-middleware": ">=6.1.2",
     "zone.js": "~0.15.0"
   },
