@@ -33,12 +33,15 @@ function ipv4RangeStart(baseAddress) {
 }
 
 function isIpv4InCidr(address, baseAddress, prefixLength) {
-  const addressValue = parseIpv4(address);
-  const baseValue = ipv4RangeStart(baseAddress);
-  const hostBits = 32 - prefixLength;
-  const rangeSize = hostBits === 0 ? 1 : 2 ** hostBits;
+  const addressValue = BigInt(parseIpv4(address));
+  const baseValue = BigInt(ipv4RangeStart(baseAddress));
+  const shift = 32n - BigInt(prefixLength);
 
-  return addressValue >= baseValue && addressValue < (baseValue + rangeSize);
+  if (shift === 0n) {
+    return addressValue === baseValue;
+  }
+
+  return (addressValue >> shift) === (baseValue >> shift);
 }
 
 function normalizeIpv6Parts(parts) {
@@ -51,7 +54,9 @@ function normalizeIpv6Parts(parts) {
 
   if (lastPart && lastPart.includes('.')) {
     const ipv4Value = parseIpv4(lastPart);
-    normalized.splice(-1, 1, ((ipv4Value >>> 16) & 0xffff).toString(16), (ipv4Value & 0xffff).toString(16));
+    const highWord = ((ipv4Value >>> 16) & 0xffff).toString(16);
+    const lowWord = (ipv4Value & 0xffff).toString(16);
+    normalized.splice(-1, 1, highWord, lowWord);
   }
 
   return normalized;
@@ -233,7 +238,8 @@ export function normalizeDestinationHost(value) {
     return hostname.toLowerCase();
   }
 
-  const normalizedHostname = domainToASCII(hostname.endsWith('.') ? hostname.slice(0, -1) : hostname);
+  const hostnameSansTrailingDot = hostname.endsWith('.') ? hostname.slice(0, -1) : hostname;
+  const normalizedHostname = domainToASCII(hostnameSansTrailingDot);
 
   if (!normalizedHostname) {
     throw new Error(`Invalid destination host: ${value}`);
