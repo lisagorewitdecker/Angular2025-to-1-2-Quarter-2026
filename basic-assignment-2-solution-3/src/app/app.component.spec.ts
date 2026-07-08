@@ -17,16 +17,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should initialize username as an empty string', waitForAsync(() => {
+  it(`should have as title 'app works!'`, waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.username).toEqual('');
+    expect(app.title).toEqual('app works!');
   }));
 
   it('should render title in a h1 tag', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Basic Assignment 2 Solution 3');
+    expect(compiled.querySelector('h1').textContent).toContain('app works!');
   }));
 });
