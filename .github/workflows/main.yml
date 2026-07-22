@@ -1,0 +1,19 @@
+- name: Angular Doctor
+  # You may pin to the exact commit or the version.
+  # uses: antonygiomarxdev/angular-doctor@31560a0175ea8099ea2d83e4a150ea6718561bcc
+  uses: antonygiomarxdev/angular-doctor@v1.3.0
+  with:
+    # Project directory to scan
+    directory: # optional, default is .
+    # Show file details per rule
+    verbose: # optional, default is true
+    # Workspace project(s) to scan (comma-separated)
+    project: # optional
+    # Base branch for diff mode (e.g. main). Only files changed vs this branch are scanned.
+    diff: # optional
+    # GitHub token for posting PR comments. When set on pull_request events, findings are posted as a PR comment.
+    github-token: # optional
+    # Exit with error code when score is below this threshold (0-100)
+    score-threshold: # optional, default is 0
+    # Node.js version to use
+    node-version: # optional, default is 20
