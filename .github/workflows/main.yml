@@ -11,9 +11,29 @@ permissions:
   contents: read
 
 jobs:
-  angular-doctor:
-    name: Run Angular Doctor
+  find-projects:
+    name: Find Angular Projects
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.find.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find Angular project directories
+        id: find
+        run: |
+          dirs=$(find . -name "angular.json" -not -path "*/node_modules/*" -exec dirname {} \; | sort | jq -R . | jq -s -c .)
+          echo "matrix=${dirs}" >> "$GITHUB_OUTPUT"
+
+  angular-doctor:
+    name: Angular Doctor (${{ matrix.directory }})
+    needs: find-projects
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: ${{ fromJSON(needs.find-projects.outputs.matrix) }}
+      fail-fast: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,8 +41,8 @@ jobs:
       - name: Angular Doctor
         uses: antonygiomarxdev/angular-doctor@v1.3.0
         with:
-          # Project directory to scan (monorepo: scan a representative Angular project)
-          directory: ./first-app
+          # Project directory to scan
+          directory: ${{ matrix.directory }}
           # Show file details per rule
           verbose: true
           # Exit with error code when score is below this threshold (0-100)
