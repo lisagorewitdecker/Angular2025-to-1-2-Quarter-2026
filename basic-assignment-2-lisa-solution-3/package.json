@@ -63,8 +63,7 @@
     "@angular-devkit/build-angular": {
       "postcss": "^8.5.10"
     },
-    "@angular/common": "^22.0.5",
-    "@babel/core": "^8.0.0",
+    "@babel/core": ">=7.29.6",
     "qs": ">=6.15.2",
     "zone.js": "~0.15.0",
     "vite": ">=6.4.3",
