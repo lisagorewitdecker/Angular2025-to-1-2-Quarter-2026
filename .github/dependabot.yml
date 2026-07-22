@@ -27,4 +27,3 @@ updates:
     commit-message:
       prefix: "deps(composer):"
     open-pull-requests-limit: 3
-    
