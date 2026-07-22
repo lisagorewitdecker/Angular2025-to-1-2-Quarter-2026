@@ -1,1 +1,87 @@
+name: Quality Scan
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  find-projects:
+    name: Find Angular Projects
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.find.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find Angular project directories
+        id: find
+        run: |
+          dirs=$(find . -name "angular.json" -not -path "*/node_modules/*" -exec dirname {} \; | sort | jq -R . | jq -s -c .)
+          if [ "${dirs}" = "[]" ] || [ -z "${dirs}" ]; then
+            echo "No Angular projects found" >&2
+            dirs="[]"
+          fi
+          echo "matrix=${dirs}" >> "$GITHUB_OUTPUT"
+
+  angular-doctor:
+    name: Angular Doctor (${{ matrix.directory }})
+    needs: find-projects
+    if: needs.find-projects.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - applying-css-classes-dynamically-ngClass
+          - basic-assignment-1-lisa-solution
+          - basic-assignment-1-solution
+          - basic-assignment-2-lisa-solution-3
+          - basic-assignment-2-solution-3
+          - basic-assignment-3-lisa-solution
+          - basics-assignment-3-instructor-solution
+          - basics-components
+          - basics-databinding
+          - cmp-databinding-start
+          - combining-forms-databinding
+          - debugging
+          - enhancing-ngif-with-else-condition
+          - event-binding
+          - first-app
+          - getting-index-when-using-ngFor
+          - my-angular-app
+          - outputting-lists-with-ngFor
+          - passing-usng-data-event-binding
+          - prj-start
+          - prj-start-a
+          - prj-start-b
+          - prj-start-c
+          - prj-start-d
+          - project-template
+          - property-binding
+          - property-binding-vs-string-interpolation
+          - string-interpolation
+          - styling-elements-dynamically-ngStyle
+          - two-way-databinding
+          - using-ngif-output-data-conditionally
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Angular Doctor
+        uses: antonygiomarxdev/angular-doctor@v1.3.0
+        with:
+          # Project directory to scan
+          directory: ${{ matrix.project }}
+          # Show file details per rule
+          verbose: true
+          # Exit with error code when score is below this threshold (0-100)
+          score-threshold: 0
+          # Node.js version to use
+          node-version: 20
