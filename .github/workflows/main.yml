@@ -11,8 +11,29 @@ permissions:
   contents: read
 
 jobs:
+  find-projects:
+    name: Find Angular Projects
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.find.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find Angular project directories
+        id: find
+        run: |
+          dirs=$(find . -name "angular.json" -not -path "*/node_modules/*" -exec dirname {} \; | sort | jq -R . | jq -s -c .)
+          if [ "${dirs}" = "[]" ] || [ -z "${dirs}" ]; then
+            echo "No Angular projects found" >&2
+            dirs="[]"
+          fi
+          echo "matrix=${dirs}" >> "$GITHUB_OUTPUT"
+
   angular-doctor:
-    name: Run Angular Doctor
+    name: Angular Doctor (${{ matrix.directory }})
+    needs: find-projects
+    if: needs.find-projects.outputs.matrix != '[]'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
