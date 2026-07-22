@@ -36,9 +36,40 @@ jobs:
     if: needs.find-projects.outputs.matrix != '[]'
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        directory: ${{ fromJSON(needs.find-projects.outputs.matrix) }}
       fail-fast: false
+      matrix:
+        project:
+          - applying-css-classes-dynamically-ngClass
+          - basic-assignment-1-lisa-solution
+          - basic-assignment-1-solution
+          - basic-assignment-2-lisa-solution-3
+          - basic-assignment-2-solution-3
+          - basic-assignment-3-lisa-solution
+          - basics-assignment-3-instructor-solution
+          - basics-components
+          - basics-databinding
+          - cmp-databinding-start
+          - combining-forms-databinding
+          - debugging
+          - enhancing-ngif-with-else-condition
+          - event-binding
+          - first-app
+          - getting-index-when-using-ngFor
+          - my-angular-app
+          - outputting-lists-with-ngFor
+          - passing-usng-data-event-binding
+          - prj-start
+          - prj-start-a
+          - prj-start-b
+          - prj-start-c
+          - prj-start-d
+          - project-template
+          - property-binding
+          - property-binding-vs-string-interpolation
+          - string-interpolation
+          - styling-elements-dynamically-ngStyle
+          - two-way-databinding
+          - using-ngif-output-data-conditionally
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -47,7 +78,7 @@ jobs:
         uses: antonygiomarxdev/angular-doctor@v1.3.0
         with:
           # Project directory to scan
-          directory: ${{ matrix.directory }}
+          directory: ${{ matrix.project }}
           # Show file details per rule
           verbose: true
           # Exit with error code when score is below this threshold (0-100)
