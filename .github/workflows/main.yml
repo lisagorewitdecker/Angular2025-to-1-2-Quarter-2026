@@ -21,8 +21,8 @@ jobs:
       - name: Angular Doctor
         uses: antonygiomarxdev/angular-doctor@v1.3.0
         with:
-          # Project directory to scan
-          directory: .
+          # Project directory to scan (monorepo: scan a representative Angular project)
+          directory: ./first-app
           # Show file details per rule
           verbose: true
           # Exit with error code when score is below this threshold (0-100)
