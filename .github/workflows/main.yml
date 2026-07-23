@@ -18,7 +18,7 @@ jobs:
       matrix: ${{ steps.find.outputs.matrix }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Find Angular project directories
         id: find
@@ -72,7 +72,7 @@ jobs:
           - using-ngif-output-data-conditionally
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Angular Doctor
         uses: antonygiomarxdev/angular-doctor@v1.3.0
