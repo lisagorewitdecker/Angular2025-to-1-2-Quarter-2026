@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^20.3.25",
-    "@angular/common": "^20.3.25",
+    "@angular/common": "^22.0.8",
     "@angular/compiler": "^20.3.25",
     "@angular/core": "^20.3.25",
     "@angular/forms": "^20.3.25",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.25",
-    "@angular/cli": "^20.3.25",
+    "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^20.3.25",
     "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",
