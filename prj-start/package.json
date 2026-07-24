@@ -32,7 +32,7 @@
     "cookie": ">=1.0.0",
     "zone.js": "~0.15.0",
     "cookie": ">=0.7.0",
-    "ip": "<= 2.0.1",
+    "ip": "<= 2.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.6",
@@ -59,6 +59,6 @@
     "cookie": ">=1.0.0",
     "zone.js": "~0.15.0",
     "cookie": ">=0.7.0",
-    "ip": "<= 2.0.1",
+    "ip": "<= 2.0.1"
   }
 }
