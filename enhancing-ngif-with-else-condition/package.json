@@ -32,8 +32,7 @@
     "vite": ">=6.1.6",
     "webpack": ">=5.97.1",
     "webpack-dev-middleware": ">=6.1.2",
-    "zone.js": "~0.15.0",
-   
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.0",

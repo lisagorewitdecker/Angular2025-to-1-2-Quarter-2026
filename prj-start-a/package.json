@@ -28,7 +28,7 @@
     "http-proxy-middleware": ">=3.0.7",
     "postcss": ">=8.4.31", 
     "zone.js": "~0.15.0",
-    "ip": "<= 2.0.1",
+    "ip": "<= 2.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.6",
@@ -52,6 +52,6 @@
     "http-proxy-middleware": ">=3.0.7",
     "postcss": ">=8.4.31", 
     "zone.js": "~0.15.0",   
-    "ip": "<= 2.0.1",
+    "ip": "<= 2.0.1"
   }
 }
