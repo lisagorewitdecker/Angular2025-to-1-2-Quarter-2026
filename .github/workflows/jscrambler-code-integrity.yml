@@ -37,7 +37,15 @@ jobs:
         if: ${{ hashFiles('package.json') != '' && hashFiles('package-lock.json') != '' }}
       - name: Jscrambler Code Integrity
         id: jscrambler
-        if: ${{ hashFiles('package.json') != '' && hashFiles('package-lock.json') != '' && hashFiles('jscrambler.json') != '' && secrets.JSCRAMBLER_APPLICATION_ID && secrets.JSCRAMBLER_SECRET_KEY && secrets.JSCRAMBLER_ACCESS_KEY }}
+        if: >-
+          ${{
+            hashFiles('package.json') != '' &&
+            hashFiles('package-lock.json') != '' &&
+            hashFiles('jscrambler.json') != '' &&
+            secrets.JSCRAMBLER_APPLICATION_ID &&
+            secrets.JSCRAMBLER_SECRET_KEY &&
+            secrets.JSCRAMBLER_ACCESS_KEY
+          }}
         # the complete list of inputs can be found here: https://github.com/marketplace/actions/jscrambler#inputs
         uses: jscrambler/code-integrity-actions/protect@ab65962a2ecffcc362b75a997e24a181d0bde5fb
         with:
