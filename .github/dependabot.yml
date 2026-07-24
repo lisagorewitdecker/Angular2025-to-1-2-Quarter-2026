@@ -16,7 +16,7 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "deps(npm):"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 8
     versioning-strategy: "increase-if-necessary"
 
   # Maintain dependencies for Composer
@@ -26,4 +26,4 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "deps(composer):"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 8
