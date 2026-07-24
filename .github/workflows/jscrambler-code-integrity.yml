@@ -36,6 +36,7 @@ jobs:
       - run: npm run build
         if: ${{ hashFiles('package.json') != '' && hashFiles('package-lock.json') != '' }}
       - name: Jscrambler Code Integrity
+        if: ${{ github.event_name == 'push' || (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]') }}
         id: jscrambler
         if: >-
           ${{
